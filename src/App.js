@@ -19,12 +19,18 @@ class App extends Component {
         this.setState({ type: event.target.value })
     };
 
+    getRandomType() {
+        const randomIndex = Math.floor(Math.random() * 3);
+        return ["shibes", "cats", "birds"][randomIndex];
+    }
+
     onSubmitForm = event => {
         event.preventDefault();
         this.setState({
             isLoading: true
-        })
-        fetch(`${apiUrl}/${this.state.type}?count=${this.state.count}`)
+        });
+        const endpoint = this.state.type === 'random' ? this.getRandomType() : this.state.type;
+        fetch(`${apiUrl}/${endpoint}?count=${this.state.count}`)
             .then(response => response.json())
             .then(photos => this.setState({
                 isLoading: false,
