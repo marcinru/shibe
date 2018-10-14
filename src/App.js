@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 
 class App extends Component {
   state = {
-      count: 1
-  }
+      count: 1,
+      type: "shibes"
+  };
   onCountChange = (event) => {
       this.setState({
           count: parseInt(event.target.value)
       })
-  }
+  };
   render() {
     return (
       <div className="container">
