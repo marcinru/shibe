@@ -2,10 +2,19 @@ body {
   background: #efefef;
 }
 
-form, h1 {
+form,
+h1,
+.search-results {
   margin-top: 25px;
 }
 
 .form-control {
   margin: 0 25px 0 5px;
+}
+
+.img-thumbnail {
+  max-height: 350px;
+  max-width: 350px;
+  margin: 0 25px 25px 0;
+  vertical-align: top;
 }

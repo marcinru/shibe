@@ -52,6 +52,11 @@ class App extends Component {
                         {this.state.isLoading ? 'Ładowanie danych' : 'Szukaj'}
                     </button>
                 </form>
+                <div className="search-results">
+                    {this.state.photos.map((photo, index) => (
+                        <img src={photo} alt="" className="img-thumbnail" key={index}/>
+                    ))}
+                </div>
             </div>
         );
     }
