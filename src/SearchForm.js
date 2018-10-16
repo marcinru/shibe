@@ -4,7 +4,7 @@ const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
 const apiUrl = corsAnywhere + 'http://shibe.online/api';
 
 class SearchForm extends Component {
-    types = ['shibes', 'cats', 'birds'];
+    types = ['shibes', 'cats', 'birds', 'random'];
     state = {
         count: 1,
         isLoading: false,
@@ -26,9 +26,7 @@ class SearchForm extends Component {
 
     onSubmitForm = event => {
         event.preventDefault();
-        this.setState({
-            isLoading: true
-        });
+        this.setState({ isLoading: true });
         const endpoint = this.state.type === 'random' ? this.getRandomType() : this.state.type;
         fetch(`${apiUrl}/${endpoint}?count=${this.state.count}`)
             .then(response => response.json())
@@ -46,10 +44,7 @@ class SearchForm extends Component {
                        value={this.state.count} onChange={this.onCountChange}/>
                 <label htmlFor="type">Typ</label>
                 <select id="type" name="type" className="form-control" onChange={this.ontTypeChange}>
-                    <option value="shibes">psy</option>
-                    <option value="cats">koty</option>
-                    <option value="birds">ptaki</option>
-                    <option value="random">losowe</option>
+                    {this.types.map(typ => <option value={typ} key={typ}>{typ}</option>)}
                 </select>
                 <button className="btn btn-primary" type="submit" disabled={this.state.isLoading}>
                     {this.state.isLoading ? 'Ładowanie danych' : 'Szukaj'}
