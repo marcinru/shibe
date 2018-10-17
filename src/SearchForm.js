@@ -28,10 +28,19 @@ class SearchForm extends Component {
         this.setState({ isLoading: true });
         const endpoint = this.state.type === 'random' ? this.getRandomType() : this.state.type;
         fetch(`${apiUrl}/${endpoint}?count=${this.state.count}`)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error(response.statusText)
+            })
             .then(photos => {
                 this.setState({ isLoading: false });
                 this.props.onGetSearchResults(photos)
+            })
+            .catch(error => {
+                this.setState({ isLoading: false });
+                console.log(error)
             });
     };
 
