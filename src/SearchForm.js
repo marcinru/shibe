@@ -40,7 +40,7 @@ class SearchForm extends Component {
             })
             .catch(error => {
                 this.setState({ isLoading: false });
-                console.log(error)
+                this.props.onGetSearchResults([], 'error')
             });
     };
 
