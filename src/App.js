@@ -5,7 +5,8 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            photos: []
+            photos: [],
+            types: ['shibes', 'cats', 'birds', 'random']
         }
         this.updatePhotos = this.updatePhotos.bind(this);
     }
@@ -19,7 +20,7 @@ class App extends Component {
             <div className="container">
                 <h1>React Native Has Power</h1>
                 <h2>zadanie weryfikujące</h2>
-                <SearchForm onUpdatePhotos={this.updatePhotos}/>
+                <SearchForm types={this.state.types} onGetSearchResults={this.updatePhotos}/>
                 <div className="search-results">
                     {this.state.photos.map((photo, index) => (
                         <img src={photo} alt="" className="img-thumbnail" key={index}/>

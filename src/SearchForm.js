@@ -4,11 +4,10 @@ const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
 const apiUrl = corsAnywhere + 'http://shibe.online/api';
 
 class SearchForm extends Component {
-    types = ['shibes', 'cats', 'birds', 'random'];
     state = {
         count: 1,
         isLoading: false,
-        type: this.types[0]
+        type: this.props.types[0]
     };
 
     onCountChange = event => {
@@ -21,7 +20,7 @@ class SearchForm extends Component {
 
     getRandomType() {
         const randomIndex = Math.floor(Math.random() * 3);
-        return this.types[randomIndex];
+        return this.props.types[randomIndex];
     }
 
     onSubmitForm = event => {
@@ -32,9 +31,9 @@ class SearchForm extends Component {
             .then(response => response.json())
             .then(photos => {
                 this.setState({ isLoading: false });
-                this.props.onUpdatePhotos(photos)
+                this.props.onGetSearchResults(photos)
             });
-    }
+    };
 
     render() {
         return (
@@ -44,7 +43,7 @@ class SearchForm extends Component {
                        value={this.state.count} onChange={this.onCountChange}/>
                 <label htmlFor="type">Typ</label>
                 <select id="type" name="type" className="form-control" onChange={this.ontTypeChange}>
-                    {this.types.map(typ => <option value={typ} key={typ}>{typ}</option>)}
+                    {this.props.types.map(typ => <option value={typ} key={typ}>{typ}</option>)}
                 </select>
                 <button className="btn btn-primary" type="submit" disabled={this.state.isLoading}>
                     {this.state.isLoading ? 'Ładowanie danych' : 'Szukaj'}
